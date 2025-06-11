@@ -1,0 +1,7 @@
+Available CLI Commands:
+- status         → Show system status via beacon
+- reset          → Trigger install/reset controller
+- focus augs     → Launch augmentation prioritization
+- sf plan        → View Source File roadmap
+- help           → List this command overview
+
