@@ -1,0 +1,7 @@
+{
+  "1": { "target": 3, "note": "Core hacking" },
+  "3": { "target": 2, "note": "Corporation benefits" },
+  "5": { "target": 1, "note": "Unlock Bladeburner" },
+  "10": { "target": 1, "note": "Enable Gang automation" }
+}
+
