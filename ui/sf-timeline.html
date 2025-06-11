@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <style>
+    body { background: #000; color: #0f0; font-family: monospace; padding: 1em; }
+    .sf { margin: 0.5em 0; }
+    .owned { color: #0f0; }
+    .target { color: #ff0; }
+    .unowned { color: #f00; }
+  </style>
+</head>
+<body>
+  <h1>🧬 Source File Progress Timeline</h1>
+  <div class="sf owned">✓ SF1 (Lv 3)</div>
+  <div class="sf owned">✓ SF3 (Lv 2)</div>
+  <div class="sf target">★ SF5 → Target Lv 1</div>
+  <div class="sf unowned">✗ SF10</div>
+</body>
+</html>
+
+lib/sf-path-data.js
+/** @param {NS} ns */
+export function getSFPlan() {
+    return {
+        "1": { level: 3, owned: true },
+        "3": { level: 2, owned: true },
+        "5": { level: 0, owned: false, target: 1 },
+        "10": { level: 0, owned: false, target: 1 }
+    };
+}
+
