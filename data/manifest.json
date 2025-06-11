@@ -1,0 +1,8 @@
+{
+  "files": [
+    "/core/suite-version.js",
+    "/core/uninstaller.js",
+    "/tools/publish-packager.js"
+  ]
+}
+
