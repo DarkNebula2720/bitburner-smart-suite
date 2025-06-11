@@ -7,3 +7,6 @@ export async function main(ns) {
         const content = ns.read(log);
         await ns.write(archive, content, "a");
         ns.rm(log);
+    }
+    ns.tprint(`Archived logs to ${archive}`);
+}
