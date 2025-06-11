@@ -3,7 +3,7 @@
 export async function main(ns) {
     ns.disableLog("ALL");
     ns.clearLog();
-    ns.tail();  // Opens the non-blocking log window
+    ns.ui.openTail("ui.js");  // Opens the non-blocking log window
     while (true) {
         ns.clearLog();
         ns.print("🧠 Bitburner Smart Suite Dashboard");
