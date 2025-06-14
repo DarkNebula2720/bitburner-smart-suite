@@ -1,0 +1,7 @@
+[
+  { "name": "Join Factions", "priority": 8, "script": "/modules/faction-manager.js", "enabled": true },
+  { "name": "Install Augs", "priority": 10, "script": "/core/augmentation-handler.js", "enabled": true },
+  { "name": "Farm Rep", "priority": 6, "script": "/modules/rep-farmer.js", "enabled": true },
+  { "name": "Run Corp", "priority": 3, "script": "/modules/corp-manager.js", "enabled": false }
+]
+
