@@ -1,0 +1,10 @@
+{
+  "version": "1.2.0",
+  "date": "2025-06-10",
+  "notes": [
+    "Added auto-sync utility",
+    "Improved SF optimization speed",
+    "Minor bug fixes"
+  ]
+}
+
