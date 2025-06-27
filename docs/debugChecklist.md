@@ -1,6 +1,6 @@
 # ✅ Debug Checklist – Bitburner Smart Suite
 
-Use this checklist after a fresh install or update:
+Use this after a fresh install or update:
 
 ## Core System
 - [ ] launcher.js launches without error
@@ -31,4 +31,7 @@ Use this checklist after a fresh install or update:
 
 ## Testing
 - [ ] tests/integrityVerifier.js returns ✅
+- [ ] tests/runAllTests.js completes with no errors
 
+## Logging
+- [ ] logs/smart-suite.log contains timestamped logs
