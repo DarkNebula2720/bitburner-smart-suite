@@ -1,0 +1,29 @@
+/**
+ * Augmentation Planner – tracks and auto-purchases augments based on priorities
+ */
+
+/** @param {NS} ns **/
+export async function main(ns) {
+    const owned = ns.getOwnedAugmentations(true);
+    const factions = ns.getPlayer().factions;
+
+    for (const faction of factions) {
+        const augs = ns.getAugmentationsFromFaction(faction);
+        for (const aug of augs) {
+            if (owned.includes(aug)) continue;
+            const rep = ns.getFactionRep(faction);
+            const cost = ns.getAugmentationCost(aug);
+            const reqRep = ns.getAugmentationRepReq(aug);
+
+            if (rep > reqRep && ns.getServerMoneyAvailable("home") > cost[0]) {
+                const success = ns.purchaseAugmentation(faction, aug);
+                if (success) {
+                    ns.tprint(`[AugPlan] Purchased ${aug} from ${faction}`);
+                }
+            }
+        }
+    }
+
+    await ns.sleep(60000); // run periodically
+}
+
