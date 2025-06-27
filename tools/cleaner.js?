@@ -1,0 +1,36 @@
+/**
+ * Suite Cleaner – removes old logs, temp files, and resets certain modules.
+ * Backs up config and state before wiping.
+ */
+
+/** @param {NS} ns **/
+export async function main(ns) {
+    const filesToDelete = [
+        "logs/network-map.txt",
+        "logs/stats-log.txt",
+        "logs/*.log",
+        "*.tmp",
+        "*.bak",
+        "data/cache.txt",
+        "data/tmp_state.txt"
+    ];
+
+    const backups = ["config.json", "src/core/state.js"];
+    for (const file of backups) {
+        if (ns.fileExists(file)) {
+            await ns.write(file + ".backup", await ns.read(file), "w");
+            ns.tprint(\`[Cleaner] Backed up \${file}\`);
+        }
+    }
+
+    for (const pattern of filesToDelete) {
+        const matched = ns.ls("home", pattern);
+        for (const file of matched) {
+            ns.rm(file);
+            ns.tprint(\`[Cleaner] Deleted \${file}\`);
+        }
+    }
+
+    ns.tprint("[Cleaner] Clean complete.");
+}
+
