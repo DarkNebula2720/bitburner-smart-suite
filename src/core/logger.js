@@ -1,18 +1,13 @@
 /**
- * Smart Logger – Tagged, leveled logging
- * Supports: info, warn, error, debug
+ * Smart Suite Logger – Centralized logging to both terminal and log file.
  */
 
-export function log(ns, msg, level = "info") {
-    const tag = {
-        info: "[INFO] ",
-        warn: "[WARN] ",
-        error: "[ERROR]",
-        debug: "[DEBUG]"
-    }[level.toLowerCase()] || "[LOG] ";
-
-    const output = `${tag} ${msg}`;
-    ns.print(output);
-    ns.tprint(output);
+/** @param {NS} ns **/
+export async function log(ns, message, type = "INFO") {
+    const timestamp = (new Date()).toISOString();
+    const formatted = `[${type}] ${timestamp} ${message}`;
+    ns.tprint(formatted);
+    await ns.write("logs/smart-suite.log", formatted + "\n", "a");
 }
 
+// Usage: import { log } from 'src/core/logger.js' and call log(ns, message, type)
