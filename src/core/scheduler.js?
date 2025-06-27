@@ -1,0 +1,24 @@
+/**
+ * Smart Scheduler – Starts and supervises major modules
+ */
+
+/** @param {NS} ns **/
+export async function main(ns) {
+    const modules = [
+        "src/automation/smartHack.js",
+        "src/automation/hacknetManager.js",
+        "src/automation/factionFarmer.js",
+        "src/automation/augmentPlanner.js",
+        "src/gui/dashboard.js"
+    ];
+
+    for (const script of modules) {
+        if (!ns.isRunning(script)) {
+            ns.run(script, 1);
+            await ns.sleep(100);
+        }
+    }
+
+    ns.tprint("[Scheduler] Core systems launched.");
+}
+
