@@ -1,17 +1,14 @@
 /**
- * Global Error Wrapper – Safe loop guard
- * Usage: await safeLoop(ns, fn)
+ * Smart Suite Error Handler – Catches and logs async errors.
  */
 
+import { log } from './logger.js';
+
 /** @param {NS} ns */
-export async function safeLoop(ns, loopFn, name = "unnamed") {
+export async function runSafe(ns, fn) {
     try {
-        await loopFn();
-    } catch (e) {
-        const msg = `[${name} crashed] ${e}`;
-        ns.tprint(msg);
-        await ns.write("logs/crash.log", `${msg}
-`, "a");
+        await fn();
+    } catch (err) {
+        await log(ns, `Unhandled error: ${err}`, "ERROR");
     }
 }
-
