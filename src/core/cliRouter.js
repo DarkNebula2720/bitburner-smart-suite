@@ -1,13 +1,10 @@
-/**
- * CLI Router – Routes command-line arguments to the correct tools
- * Usage: run cliRouter.js [command]
- */
+import { log } from './logger.js';
 
 /** @param {NS} ns **/
 export async function main(ns) {
     const command = ns.args[0];
     if (!command) {
-        ns.tprint("Usage: run cliRouter.js [scan|clean|test|help]");
+        await log(ns, "Usage: run cliRouter.js [scan|clean|test|help]", "WARN");
         return;
     }
 
@@ -23,11 +20,6 @@ export async function main(ns) {
             break;
         case "help":
         default:
-            ns.tprint("Available CLI commands:");
-            ns.tprint("  scan   - Run network scanner");
-            ns.tprint("  clean  - Run cleaner utility");
-            ns.tprint("  test   - Run integrity verifier");
-            ns.tprint("  help   - Show this help message");
+            await log(ns, "Available CLI commands:\n  scan   - Run network scanner\n  clean  - Run cleaner utility\n  test   - Run integrity verifier\n  help   - Show this help message", "INFO");
     }
 }
-
