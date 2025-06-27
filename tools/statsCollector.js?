@@ -1,0 +1,14 @@
+/**
+ * Stats Collector – logs player's key stats over time
+ */
+
+/** @param {NS} ns **/
+export async function main(ns) {
+    while (true) {
+        const p = ns.getPlayer();
+        const logEntry = \`[\${new Date().toISOString()}] Hack: \${p.hacking} | Str: \${p.strength} | Int: \${p.intelligence} | Karma: \${ns.heart.break()}\`;
+        await ns.write("logs/stats-log.txt", logEntry + "\n", "a");
+        await ns.sleep(60000); // log every minute
+    }
+}
+
