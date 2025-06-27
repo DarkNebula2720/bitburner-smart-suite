@@ -1,0 +1,27 @@
+/**
+ * Central launcher script – prompts for mode and passes args
+ */
+
+/** @param {NS} ns **/
+export async function main(ns) {
+    const args = ns.args;
+    const useManual = args.includes("--manual");
+
+    let config = { mode: "auto", version: "full" };
+
+    if (useManual) {
+        const input = await ns.prompt("Choose version:", { type: "select", choices: ["full", "lite"] });
+        config.version = input;
+    } else {
+        const settings = ns.getScriptArgs("config.json");
+        if (settings && settings.version) config.version = settings.version;
+    }
+
+    const entry = config.version === "lite"
+        ? "modes/lite/init.js"
+        : "modes/full/init.js";
+
+    ns.tprint(`[Launcher] Starting ${config.version.toUpperCase()} mode...`);
+    ns.run(entry, 1);
+}
+
