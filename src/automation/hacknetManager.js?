@@ -1,0 +1,33 @@
+/**
+ * Hacknet Manager – Automatically buys nodes and upgrades intelligently
+ */
+
+/** @param {NS} ns **/
+export async function main(ns) {
+    while (true) {
+        const nodes = ns.hacknet.numNodes();
+        if (ns.getServerMoneyAvailable("home") > 1e6) {
+            if (ns.hacknet.getPurchaseNodeCost() < ns.getServerMoneyAvailable("home") * 0.2) {
+                ns.hacknet.purchaseNode();
+            }
+        }
+
+        for (let i = 0; i < nodes; i++) {
+            const upgrades = [
+                ["Level", ns.hacknet.getLevelUpgradeCost(i, 1), ns.hacknet.upgradeLevel],
+                ["RAM", ns.hacknet.getRamUpgradeCost(i, 1), ns.hacknet.upgradeRam],
+                ["Cores", ns.hacknet.getCoreUpgradeCost(i, 1), ns.hacknet.upgradeCore]
+            ];
+
+            for (const [type, cost, upgradeFn] of upgrades) {
+                if (cost < ns.getServerMoneyAvailable("home") * 0.1) {
+                    upgradeFn(i, 1);
+                    ns.print(`[Hacknet] Upgraded ${type} on Node ${i}`);
+                }
+            }
+        }
+
+        await ns.sleep(5000);
+    }
+}
+
