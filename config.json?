@@ -1,0 +1,9 @@
+{
+  "mode": "auto",
+  "version": "full",
+  "logLevel": "info",
+  "autorun": true,
+  "gui": true,
+  "recovery": true
+}
+
