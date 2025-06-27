@@ -1,0 +1,45 @@
+/**
+ * Global runtime state store and accessor
+ */
+
+let _state = {
+    tick: 0,
+    activeMode: "full",
+    logLevel: "info",
+    cache: {}
+};
+
+/** @param {NS} ns **/
+export function initState(ns, mode = "full") {
+    _state.activeMode = mode;
+    _state.tick = 0;
+    ns.print("[State] Initialized mode:", mode);
+}
+
+/** @returns {string} */
+export function getMode() {
+    return _state.activeMode;
+}
+
+/** @returns {number} */
+export function getTick() {
+    return _state.tick;
+}
+
+/** @param {string} key */
+export function get(key) {
+    return _state.cache[key];
+}
+
+/** @param {string} key @param {*} value */
+export function set(key, value) {
+    _state.cache[key] = value;
+}
+
+/** @param {NS} ns **/
+export function tick(ns) {
+    _state.tick++;
+    if (_state.tick % 10 === 0)
+        ns.print("[State] Tick:", _state.tick);
+}
+
