@@ -1,0 +1,24 @@
+/**
+ * Smart Logger – leveled logging output
+ */
+
+let currentLevel = "info";
+const levels = { debug: 0, info: 1, warn: 2, error: 3 };
+
+export function setLogLevel(level) {
+    if (levels[level] !== undefined) currentLevel = level;
+}
+
+export function log(level, message, ns = null) {
+    if (levels[level] >= levels[currentLevel]) {
+        const output = \`[${level.toUpperCase()}] ${message}\`;
+        if (ns) ns.print(output);
+        else console.log(output);
+    }
+}
+
+export function debug(msg, ns = null) { log("debug", msg, ns); }
+export function info(msg, ns = null) { log("info", msg, ns); }
+export function warn(msg, ns = null) { log("warn", msg, ns); }
+export function error(msg, ns = null) { log("error", msg, ns); }
+
