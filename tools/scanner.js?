@@ -1,0 +1,30 @@
+/**
+ * Network Scanner – maps all reachable servers and outputs connections
+ */
+
+/** @param {NS} ns **/
+export async function main(ns) {
+    const visited = new Set();
+    const map = {};
+
+    function scan(host) {
+        visited.add(host);
+        const neighbors = ns.scan(host);
+        map[host] = neighbors;
+        for (const neighbor of neighbors) {
+            if (!visited.has(neighbor)) {
+                scan(neighbor);
+            }
+        }
+    }
+
+    scan("home");
+
+    const flat = Object.entries(map)
+        .map(([host, neighbors]) => \`\${host.padEnd(20)} → \${neighbors.join(", ")}\`)
+        .join("\n");
+
+    await ns.write("logs/network-map.txt", flat, "w");
+    ns.tprint("[Scanner] Network scan complete. Saved to logs/network-map.txt");
+}
+
