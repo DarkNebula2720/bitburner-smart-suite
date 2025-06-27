@@ -1,0 +1,18 @@
+# Ignore logs, temp, and backup files
+logs/
+*.log
+*.tmp
+*.backup
+*.bak
+
+# IDE and system files
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+# Output and testing
+*.out
+*.test.js
+__pycache__/
+
