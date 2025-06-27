@@ -1,0 +1,28 @@
+/**
+ * Faction Farmer – Automatically works for joined factions to farm rep
+ */
+
+/** @param {NS} ns **/
+export async function main(ns) {
+    const factions = ns.getPlayer().factions;
+    const ignored = ["Illuminati", "Daedalus", "The Covenant"]; // endgame
+
+    for (const faction of factions) {
+        if (ignored.includes(faction)) continue;
+
+        const workTypes = ["Hacking Contracts", "Field Work", "Security Work"];
+        for (const type of workTypes) {
+            if (ns.workForFaction(faction, type, false)) {
+                ns.tprint(`[Faction] Working for ${faction} (${type})`);
+                await ns.sleep(1000);
+                break;
+            }
+        }
+
+        await ns.sleep(500);
+    }
+
+    await ns.sleep(10000); // delay loop
+    ns.spawn("src/automation/factionFarmer.js", 1); // loop manually
+}
+
