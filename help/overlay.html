@@ -1,0 +1,32 @@
+<!-- Smart Suite Help Overlay HTML -->
+<div id="smart-help-overlay" style="
+  position:fixed;
+  top:50px;
+  left:50px;
+  right:50px;
+  bottom:50px;
+  background:#111;
+  color:#eee;
+  padding:20px;
+  overflow:auto;
+  z-index:99999;
+  font-family: monospace;
+">
+  <h2>📘 Smart Suite Help</h2>
+  <p>This overlay provides quick help for the Bitburner Smart Suite.</p>
+  <ul>
+    <li><b>Modes</b>: Full or Lite</li>
+    <li><b>Commands</b>: Use <code>commandRouter.js</code> in Lite Mode</li>
+    <li><b>GUI</b>: Use hotbar or run <code>dashboard.js</code></li>
+    <li><b>Test</b>: Run <code>tests/integrityVerifier.js</code></li>
+  </ul>
+  <button onclick="document.getElementById('smart-help-overlay').remove()" style="
+    margin-top:20px;
+    background:#222;
+    color:#fff;
+    border:1px solid #555;
+    padding:5px 10px;
+    cursor:pointer;
+  ">Close</button>
+</div>
+
