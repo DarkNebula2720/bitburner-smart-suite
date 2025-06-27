@@ -1,0 +1,36 @@
+/**
+ * Hotbar GUI Overlay – Quick Command Buttons (Full Mode Only)
+ */
+
+/** @param {NS} ns **/
+export async function main(ns) {
+    const html = \`
+    <div id="hotbar" style="
+        position: fixed;
+        bottom: 20px;
+        left: 50%;
+        transform: translateX(-50%);
+        background: #222;
+        color: #fff;
+        padding: 6px 12px;
+        font-family: monospace;
+        border: 1px solid #444;
+        border-radius: 12px;
+        z-index: 9999;
+        display: flex;
+        gap: 10px;
+    ">
+        <button onclick="eval('window').postMessage({ type: 'run', script: 'tools/scanner.js' })">🔍 Scan</button>
+        <button onclick="eval('window').postMessage({ type: 'run', script: 'tools/cleaner.js' })">🧹 Clean</button>
+        <button onclick="eval('window').postMessage({ type: 'run', script: 'tests/integrityVerifier.js' })">🧪 Test</button>
+    </div>
+    \`;
+
+    const doc = eval("document");
+    const div = doc.createElement("div");
+    div.innerHTML = html;
+    doc.body.appendChild(div);
+
+    ns.tprint("[Hotbar] GUI overlay loaded.");
+}
+
