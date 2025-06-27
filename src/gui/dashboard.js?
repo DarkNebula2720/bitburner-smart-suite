@@ -1,0 +1,47 @@
+/**
+ * Visual Dashboard Overlay (HTML-based) – Full Mode Only
+ */
+
+/** @param {NS} ns **/
+export async function main(ns) {
+    const html = \`
+    <div style="
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        background: #111;
+        color: #eee;
+        padding: 10px 20px;
+        font-family: monospace;
+        border: 1px solid #444;
+        border-radius: 10px;
+        z-index: 9999;
+    ">
+        <h3 style="margin: 0;">📊 Smart Dashboard</h3>
+        <div id="dashboard-content">
+            <p>Mode: Full</p>
+            <p>Tick: 0</p>
+            <p>Money: \$0</p>
+        </div>
+    </div>
+    \`;
+
+    const doc = eval("document");  // Bitburner-safe
+    const div = doc.createElement("div");
+    div.innerHTML = html;
+    doc.body.appendChild(div);
+
+    while (true) {
+        const content = doc.getElementById("dashboard-content");
+        if (content) {
+            const money = ns.nFormat(ns.getServerMoneyAvailable("home"), "$0.00a");
+            content.innerHTML = \`
+                <p>Mode: Full</p>
+                <p>Tick: \${Math.floor(performance.now() / 1000)}</p>
+                <p>Money: \${money}</p>
+            \`;
+        }
+        await ns.sleep(1000);
+    }
+}
+
